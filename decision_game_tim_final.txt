@@ -1,0 +1,900 @@
+# Importing necessary packages
+import time
+import random
+
+###################
+# stage 1         #
+###################
+
+# Function for stage 1
+def stage_1():
+    # First print to introduce the settings
+    print("""
+Welcome to the project evaluation tool!
+This gamified tool was created to evaluate risky innovation projects.
+
+######################################################
+# DISCLAIMER:                                        #
+# DO NOT MAKE BUSINESS DECISIONS BASED ON THIS GAME. #
+######################################################""")
+    
+    # Timeouts are set frequently to make reading easier
+    time.sleep(0.5)
+    
+    # Enter press to confirm that first paragraph was read
+    first_paragraph_read = input(prompt =
+        f"""
+<Press Enter to Continue>
+""")
+    # Timeout to make reading easier
+    time.sleep(0.5)
+    # Text to introduce first task
+    print("""
+To evaluate your project you first need a project idea of course!""")
+    # Timeout to make reading easier
+    time.sleep(0.5)
+    
+    # Check whether project idea exists
+    project_idea_test = input(prompt =
+        f"""
+Do you already have an idea?
+    1. Yes
+    2. No
+--> """)
+    # Create a variable for the project idea, empty for now will be filled later
+    project_idea = ""
+    # Checker to start/stop while loop (Remark: using checkers is a personal preference, while True would work as well)
+    check_1 = 0
+    # While loop to check the input and loop back on wrong input
+    while check_1 < 1:
+        # If person already has an idea, just ask for it
+        if "y" in project_idea_test.lower() or "1" in project_idea_test:
+            # Timeout to make reading easier
+            time.sleep(0.5)
+            # Asking for input for the idea
+            project_idea = input(prompt =
+        f"""
+That's great! What's your idea? (Try to keep it short if you can)
+--> """)
+            # Checking the input length to exclude short inputs as not sufficient, does not influence the game
+            if len(project_idea) < 5:
+                print("""
+That is a bit too short for me to tell whether your idea is actually good...""")
+            else:
+                print(f"""
+{project_idea}
+Wow that sounds interesting!""")
+            check_1 = 1
+        # if the person does not have an idea, help them with some questions    
+        elif "n" in project_idea_test.lower() or "2" in project_idea_test:
+            # Timeout to make reading easier
+            time.sleep(0.5)    
+            print(f"""
+That's fine. Let's figure it out together then!""")
+            # Asking for a product
+            product = input(prompt =
+        f"""
+What is a product you really like? (In singular, e.g. apple)
+--> """)
+            # Asking for a technology
+            technology = input(prompt =
+        f"""
+Which technology do you find interesting? (As a singular noun)
+--> """)
+            # Asking for details on the product
+            what_it_does = input(prompt =
+        f"""
+What should it do that makes it better than similar products? 
+(Use a verb in base form in combination with what it does to describe this. E.g. 'make it better')
+--> """)
+            # Combining inputs to formulate a project idea
+            project_idea = f"""A {product.lower()} that uses {technology} to {what_it_does.lower()}"""
+            # Timeout to make reading easier
+            time.sleep(0.5)
+            # Printing out the combined project idea
+            print(f"""
+So your project idea is to build:
+{project_idea}!""")
+            check_1 = 1
+        
+        # If input was an unexpected input ask for input again with some help
+        else:
+            project_idea_test = input(prompt = f"""
+Sorry but it seems like your answer doesn't match the question.
+Use yes/no or 1/2 please.
+--> """)
+            check_1 = 0
+    
+    # Enter press to confirm that product idea was read
+    product_idea_read = input(prompt =
+        f"""
+<Press Enter to Continue>
+""")
+    # Timeout to make reading easier
+    time.sleep(0.5)
+    
+    # Timeout to make reading easier
+    time.sleep(0.5)
+    # Evaluating project idea with questionnaires
+    print("""
+Now it is time to evaluate your idea.
+Please answer the following questions truthfully:""")
+    
+    # Asking for the likelihood of economic success
+    economic_success_input = input(prompt =
+        f"""
+How likely is it that your product idea will succeed commercially?
+
+    1. < 25 %
+    2.   50 %
+    3.   75 %
+    4. > 90 %
+--> """)
+    
+    # Depending on the answer they get points (unknown to the user how many points you get)
+    # Creating a variable for economic success, default is set to 0
+    economic_success = 0
+    # Checker to start/stop while loop (Remark: using checkers is a personal preference, while True would work as well)
+    check_3 = 0
+    # while loop to check input on economic success question
+    while check_3 < 1:
+        # if user answers with option 1, economic success is scored 1 (check source for scoring)
+        if "25" in economic_success_input or economic_success_input == "1":
+            time.sleep(0.5)
+            economic_success = 1
+            economic_success = float(economic_success)
+            check_3 = 1
+            
+        # if user answers with option 2, economic success is scored 4 (check source for scoring)
+        elif "50" in economic_success_input or economic_success_input == "2":
+            time.sleep(0.5)
+            economic_success = 4
+            economic_success = float(economic_success)
+            check_3 = 1
+        
+        # if user answers with option 3, economic success is scored 7 (check source for scoring)
+        elif "75" in economic_success_input or economic_success_input == "3":
+            time.sleep(0.5)
+            economic_success = 7
+            economic_success = float(economic_success)
+            check_3 = 1
+
+        # if user answers with option 4, economic success is scored 10 (check source for scoring)
+        elif "90" in economic_success_input or economic_success_input == "4":
+            time.sleep(0.5)
+            economic_success = 10
+            economic_success = float(economic_success)
+            check_3 = 1
+        
+        # Checking for wrong inputs
+        else:
+            economic_success_input = input(prompt = f"""
+Sorry but it seems like your answer doesn't match the question.
+Use the percentage number (25, 50, 75, 90) or 1/2/3/4 please.
+--> """)
+            check_3 = 0
+
+    # Asking about market competitiveness
+    competition_input = input(prompt =
+        f"""
+How is the competitive intensity in the market you would be competing in?
+(High means a lot of competition, low mean almost no competition.)
+
+    1. High
+    2. Medium high
+    3. Medium low
+    4. Low
+--> """)
+    
+    # Depending on the answer they get points (unknown to the user how many points you get)
+    competition = 0
+    # Checker to start/stop while loop (Remark: using checkers is a personal preference, while True would work as well)
+    check_4 = 0
+    while check_4 < 1:
+        
+        # if user answers with option 1, competition is scored 1 (check source for scoring)
+        if competition_input.lower() == "high" or competition_input == "1":
+            time.sleep(0.5)
+            competition = 1
+            competition = float(competition)
+            check_4 = 1
+         
+        # if user answers with option 2, competition is scored 4 (check source for scoring)
+        elif competition_input.lower() == "medium high" or competition_input == "2":
+            time.sleep(0.5)
+            competition = 4
+            competition = float(competition)
+            check_4 = 1
+
+        # if user answers with option 3, competition is scored 7 (check source for scoring)
+        elif competition_input.lower() == "medium low" or competition_input == "3":
+            time.sleep(0.5)
+            competition = 7
+            competition = float(competition)
+            check_4 = 1
+        
+        # if user answers with option 4, competition is scored 10 (check source for scoring)
+        elif competition_input.lower() == "low" or competition_input == "4":
+            time.sleep(0.5)
+            competition = 10
+            competition = float(competition)
+            check_4 = 1
+            
+        # Checking for wrong inputs   
+        else:
+            competition_input = input(prompt = f"""
+Sorry but it seems like your answer doesn't match the question.
+Use 1/2/3/4 or the whole response to answer please.
+--> """)
+            check_4 = 0
+    
+    # List of random comments for loading time
+    loading_lst = ["Discovering new ways of making you wait.",
+                   "Your time is very important to us. Please wait while we ignore you.", 
+                   "Still faster than Windows update.",
+                   "We are not liable for any broken screens as a result of waiting.",
+                   "Bored of slow loading spinner?, buy more RAM!",
+                   "Kindly hold on until I finish a cup of coffee.",
+                   "We will be back in 1/0 minutes.",
+                   "Why don't you order a sandwich?",
+                   "Don't panic, Just count to infinite.",
+                   "Please wait, Your PC is not a superman!"]
+    
+    # Creating a list of points to build a loading sequence
+    point_lst = ['.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',]
+    # Timeout to make reading easier
+    time.sleep(1)
+    print("""
+Thank you for your input! Now it's time to evaluate your project.""")
+    # Timeout to make reading easier
+    time.sleep(1)
+    print("Computing...")
+    # Timeout to make reading easier
+    time.sleep(1)
+    # Loading sequence using the points in the list and a delay of 0.2 seconds after each point
+    for point in point_lst:
+        print(point, end = '')
+        time.sleep(0.2)
+    # Timeout to make reading easier
+    time.sleep(0.5)
+    # Printing a random loading comment from the list
+    print(f"""
+{random.choice(loading_lst)}""")
+    time.sleep(1)
+    # Loading sequence using the points in the list and a delay of 0.2 seconds after each point
+    for point in point_lst:
+        print(point, end = '')
+        time.sleep(0.2)
+    # Timeout to make reading easier
+    time.sleep(0.5)
+    
+    # Calculating the result based on the answers and the points for each answer
+    # The question on competition counts half as much as the first question
+    result_phase_1 = (economic_success * 1) + (competition * 0.5)
+    print("""
+The results are in:""")
+    # Timeout to make reading easier
+    time.sleep(0.5)
+    # Checker to start/stop while loop (Remark: using checkers is a personal preference, while True would work as well)
+    check_5 = 0
+    while check_5 < 1:
+        # With more than 10 points you immediately advance to the second stage
+        if result_phase_1 >= 10:
+            print("""Your project's rating is above average!
+Now it is time to proceed to the next stage and start the project.""")
+            # Enter press to confirm that product idea was read
+            result_read = input(prompt =
+        f"""
+<Press Enter to Continue to Stage 2>
+""")
+            check_5 = 1
+            # Starting stage 2
+            stage_2()
+        # With 5 to 10 points you enter a waiting loop
+        elif result_phase_1 < 10 and result_phase_1 >= 5:
+            print("""Your project's rating is average/slightly below average.
+Management has decided to put your project on hold for now.
+Please wait until capacity is available""")
+            check_5 = 1
+            # Checker to start/stop while loop (Remark: using checkers is a personal preference, while True would work as well)
+            check_6 = 0
+            # Waiting loop that depends on the dice roll
+            while check_6 < 1:
+                # Creating a dice to randomly create a waiting sequence
+                dice = random.randint(1, 6)
+                waiting = input(prompt =
+        f"""
+<Press Enter to start waiting>
+""")
+                # Timeout to make reading easier
+                time.sleep(1)
+                print("Waiting...")
+                # Timeout to make reading easier
+                time.sleep(1)
+                # Loading sequence using the points in the list and a delay of 0.2 seconds after each point
+                for point in point_lst:
+                    print(point, end = '')
+                    time.sleep(0.2)
+                # Timeout to make reading easier
+                time.sleep(0.5)
+                # Printing a random loading comment from the list
+                print(f"""
+{random.choice(loading_lst)}""")
+                time.sleep(1)
+                # Loading sequence using the points in the list and a delay of 0.2 seconds after each point
+                for point in point_lst:
+                    print(point, end = '')
+                    time.sleep(0.2)
+                # Timeout to make reading easier
+                time.sleep(0.5)
+                
+                # If the dice rolls a 6 then you advance to stage 2
+                if dice == 6:
+                    print("""
+
+You made it off the waiting list and your project will be continued!""")
+                    check_6 = 1
+                    result_read = input(prompt =
+                                        f"""
+<Press Enter to Continue to Stage 2>
+""")
+                    # Starting stage 2
+                    stage_2()
+                    
+                # If the dice rolls a 1 then you fail the game
+                elif dice == 1:
+                    check_6 = 1
+                    # Going to the fail function
+                    fail_function()
+                
+                # In all other cases you have to continue waiting
+                else: 
+                    print("""
+You need to wait a bit longer""")
+                    check_6 = 0
+                    
+        # If the score is lower than 5 then you automatically fail
+        else:
+            # Going to the fail function
+            fail_function()
+            check_5 = 1
+            
+    # Timeout to make reading easier
+    time.sleep(0.5)
+    
+
+###################
+# stage 2         #
+###################
+
+# Function for stage 2
+def stage_2():
+    print(f"""
+{'#' * 50}
+Congrats you reached Stage 2!""")
+
+    # Timeout to make reading easier
+    time.sleep(0.5)
+    
+    # Check to see if first paragraph was read
+    input(prompt = f"""
+It is time to start working on developing your product.
+While the development is going smoothly for most of the time
+you encounter some risks that have to be dealt with.
+
+<Press Enter to continue>
+""")
+    # Timeout to make reading easier
+    time.sleep(0.5)
+    
+    # Creating a list with possible risks, grouped by risk categories
+    # list in list with first entry being the risk and second entry being the description of the risk
+    # Technological risks
+    technology_risk_lst = [['Equipment risk', 'A machine you require to make your product is not available.'],
+                          ['Engineering and design change risk', 'You need to make adaptions to your product which changes the manufacturing process.'],
+                          ['Technology selection risk', 'The production method you selected is difficult to use and bears additional problems.'],
+                          ]
+    
+    # Time risks
+    time_risk_lst = [['Improper estimates risk', 'You planned in too little time for a development stage. Now you detected an error in the product.'],
+                    ['Project delay risk', 'There have been too many delays in development. The longer project duration leads to higher costs.']
+                    ]
+    
+    # dices to determine whether a risk takes place or not
+    # 3 = no risk in this category, 0/1/2 = risk 1/2/3 in list occurs
+    tech_dice = random.randint(0, 3)
+    # 2 = no risk in this category, 0/1 = risk 1/2 in list occurs
+    time_dice = random.randint(0, 2)
+    
+    # Creating fail variable to exit the loop in case of a fail, default is 0
+    fail = 0
+    
+    # Introducing the tech risk
+    tech_intro = input(prompt = f"""
+Let's look at your technological development first.
+<Press enter to continue>
+""")
+    
+    # Rolling a 3 makes you skip this risk immediately
+    if tech_dice == 3:
+        input(prompt = f"""
+Seems like everything is on track here. Good job!
+<Press enter to continue>
+""")
+    
+    # Otherwise a risk is chosen by the dice
+    elif tech_dice != 3:
+        # Choosing a risk out of the list
+        input(prompt = f"""
+{technology_risk_lst[tech_dice][0]}:
+{technology_risk_lst[tech_dice][1]}
+
+<Press enter to continue>
+""")
+        # Timeout to make reading easier
+        time.sleep(0.5)
+        # Creating random number to simulate different risk costs
+        
+        # Damage caused when ignoring the risk
+        damage = random.randint(1, 100)
+        
+        # Cost to fix the risk
+        fix = random.randint(1, 100)
+        
+        # User decision to ignore the risk or to fix it
+        # The right decision is to fix when fix is cheaper than the risk 
+        # and to ignore when the risk is cheaper than the fix
+        tech_decision = input(prompt = f"""
+Now it is time to make a hard decision:
+Your team calculated that it would cost you $ {damage} Million 
+if you ignore the risk and just move on with your project.
+
+Your team also calculated that a fix would cost you $ {fix} Million.
+
+Do you want to:
+    1. Ignore the risk
+    2. Fix the issue
+--> """)
+        
+        check_6 = 0
+        
+        while check_6 < 1:
+            # Choose to ignore while risk cost is lower than fix cost
+            if (tech_decision == "1" or "ignore" in tech_decision.lower()) and damage < fix:
+                input(prompt = f"""
+Good decision!
+
+<Press enter to continue>
+""")
+                # Timeout to make reading easier
+                time.sleep(0.5)
+                check_6 = 1
+            # Choose to fix while fix cost is lower than risk cost
+            elif (tech_decision == "2" or "fix" in tech_decision.lower()) and fix < damage:
+                input(prompt = f"""
+Good decision!
+
+<Press enter to continue>
+""")
+                # Timeout to make reading easier
+                time.sleep(0.5)
+                check_6 = 1
+            # Choose to ignore while fix cost is lower than risk cost
+            elif (tech_decision == "1" or "ignore" in tech_decision.lower()) and fix < damage:
+                input(prompt = f"""
+That backfired!
+
+<Press enter to continue>
+""")
+                # Timeout to make reading easier
+                time.sleep(0.5)
+                check_6 = 1
+                # Going to the fail function
+                fail_function()
+                # checker to get out of stage 2 when there is a fail
+                fail = 1
+            # Choose to fix while risk cost is lower than fix cost
+            elif (tech_decision == "2" or "fix" in tech_decision.lower()) and damage < fix:
+                input(prompt = f"""
+That backfired!
+
+<Press enter to continue>
+""")
+                # Timeout to make reading easier
+                time.sleep(0.5)
+                check_6 = 1
+                # Going to the fail function
+                fail_function()
+                # checker to get out of stage 2 when there is a fail
+                fail = 1
+            # Case when both cost the same, both are acceptable    
+            elif damage == fix:
+                input(prompt = f"""
+Both are acceptable since both would cost the same.
+
+<Press enter to continue>
+""")
+                # Timeout to make reading easier
+                time.sleep(0.5)
+                check_6 = 1
+            # Wrong input in all other cases
+            else:
+                tech_decision = input(prompt = f"""
+Please use 1/2 or 'ignore'/'fix' to choose what you want to do.
+--> """)
+                check_6 = 0
+        
+    else:
+        print('Error Tech Risk')
+
+# To get out of the function when there was a fail this check stops the rest of the script
+    if fail == 1:
+        pass
+    else:
+        # Time risk block, same functionality as above
+        time_intro = input(prompt = f"""
+Now we take a look at your scheduling.
+<Press enter to continue>
+""")
+
+        # If you the time dice rolls a 2 you get lucky and skip this part
+        if time_dice == 2:
+            input(prompt = f"""
+Seems like everything is on track here. Good job!
+<Press enter to continue>
+""")
+            input(prompt = f"""
+You made it through the second stage!
+
+<Press Enter to continue to Stage 3>
+""")
+            # Continue straight to stage 3
+            stage_3()
+        # all other dice rolls link to a risk
+        elif time_dice != 2:
+            # Choosing a risk out of the list
+            input(prompt = f"""
+{time_risk_lst[time_dice][0]}:
+{time_risk_lst[time_dice][1]}
+
+<Press enter to continue>
+""")
+            # Timeout to make reading easier
+            time.sleep(0.5)
+            # Creating random number to simulate different risk costs
+        
+            # Damage caused when ignoring the risk
+            damage = random.randint(1, 100)
+        
+            # Cost to fix the risk
+            fix = random.randint(1, 100)
+        
+            # User decision to ignore the risk or to fix it
+            # The right decision is to fix when fix is cheaper than the risk 
+            # and to ignore when the risk is cheaper than the fix
+            time_decision = input(prompt = f"""
+Again it is time to make a hard decision:
+Your team calculated that it would cost you $ {damage} Million 
+if you ignore the risk and just move on with your project.
+
+Your team also calculated that a fix would cost you $ {fix} Million.
+
+Do you want to:
+    1. Ignore the risk
+    2. Fix the issue
+--> """)
+        
+            check_7 = 0
+            while check_7 < 1:
+                # Choose to ignore while risk cost is lower than fix cost
+                if (time_decision == "1" or "ignore" in time_decision.lower()) and damage < fix:
+                    input(prompt = f"""
+Good decision!
+
+<Press enter to continue>
+""")
+                    # Timeout to make reading easier
+                    time.sleep(0.5)
+                    check_7 = 1
+                    input(prompt = f"""
+You made it through the second stage!
+
+<Press Enter to continue to Stage 3>
+""")
+                    # Going to stage 3
+                    stage_3()
+                # Choose to fix while fix cost is lower than risk cost
+                elif (time_decision == "2" or "fix" in time_decision.lower()) and fix < damage:
+                    input(prompt = f"""
+Good decision!
+
+<Press enter to continue>
+""")
+                    # Timeout to make reading easier
+                    time.sleep(0.5)
+                    check_7 = 1
+                    input(prompt = f"""
+You made it through the second stage!
+
+<Press Enter to continue to Stage 3>
+""")
+                    # Going to stage 3
+                    stage_3()
+
+                # Choose to ignore while fix cost is lower than risk cost
+                elif (time_decision == "1" or "ignore" in time_decision.lower()) and fix < damage:
+                    input(prompt = f"""
+That backfired!
+
+<Press enter to continue>
+""")
+                    # Timeout to make reading easier
+                    time.sleep(0.5)
+                    check_7 = 1
+                    # Going to the fail function
+                    fail_function()
+                # Choose to fix while risk cost is lower than fix cost
+                elif (time_decision == "2" or "fix" in time_decision.lower()) and damage < fix:
+                    input(prompt = f"""
+That backfired!
+
+<Press enter to continue>
+""")
+                    # Timeout to make reading easier
+                    time.sleep(0.5)
+                    check_7 = 1
+                    # Going to the fail function
+                    fail_function()
+                # Case when both cost the same, both are acceptable    
+                elif damage == fix:
+                    input(prompt = f"""
+Both are acceptable since both would cost the same.
+
+<Press enter to continue>
+""")
+                    # Timeout to make reading easier
+                    time.sleep(0.5)
+                    check_7 = 1
+                # Else clause handling unexpected input
+                else:
+                    time_decision = input(prompt = f"""
+Please use 1/2 or 'ignore'/'fix' to choose what you want to do.
+--> """)
+                    check_7 = 0
+
+        # General else clause handles bigger issue (in theory should not happen)
+        else:
+            print('Error Time Risk')
+                
+
+
+
+    
+###################
+# stage 3         #
+###################    
+
+# Function for stage 3
+def stage_3():
+    print(f"""
+{'#' * 50}
+Congrats you reached Stage 3!
+""")
+    # Timeout to make reading easier
+    time.sleep(0.5)
+    
+    # Checker for whether first paragraph was read
+    input(prompt = f"""
+As your project is in its final phase there is only a few things left to do.
+But there are still some possible issues on your way.
+
+<Press Enter to continue>
+""")
+    # Timeout to make reading easier
+    time.sleep(0.5)
+    
+    # to do list with all things still to do
+    to_do_lst = ['1. Develop a Minimum Viable Product (MVP)', 
+                 '2. Do a Customer Co-Creation Project (CCP)']
+    
+    # Create an empty list to check on all the things that still need to be done
+    check_lst = []
+    
+    # Asking the user what they want to do next
+    to_do_input = input(prompt = f"""
+What do you want to do next?
+    {to_do_lst[0]}
+    {to_do_lst[1]}
+    3. Bring the project to an end
+--> """)
+    
+    # While loop running as long as the check list does not contain 2 items
+    while len(check_lst) < 2:
+        # Answer to input == 1
+        if to_do_input == "1" or 'mvp' in to_do_input.lower():
+            # Adding it to the check list
+            check_lst.append(to_do_lst[0])
+            # Change it in the to do list
+            to_do_lst[0] = "Already Done"
+            # Response to input
+            input(prompt = f"""
+Good decision. The MVP helped you to make some final adjustments.
+        
+<Press Enter to continue>
+""")
+            to_do_lst[0] == "Already Done"
+        
+        # Answer to input == 2
+        elif to_do_input == "2" or 'ccp' in to_do_input.lower():
+            # Adding it to the check list
+            check_lst.append(to_do_lst[1])
+            # Change it in the to do list
+            to_do_lst[1] = "Already Done"
+            # Response to input
+            input(prompt = f"""
+It's very important to get your customers involved as well.
+They helped you to find a crucial functionality that was still missing.
+        
+<Press Enter to continue>
+""")
+            to_do_lst[1] == "Already Done"
+
+        # Answer to input == 3   
+        elif to_do_input == "3" or 'end' in to_do_input.lower():
+            # Response to input
+            input(prompt = f"""
+You should really consider doing the recommended activities!
+        
+<Press Enter to continue>
+""")
+        
+        # Case for faulty inputs
+        else:
+            to_do_input = input(prompt = f"""
+Sorry but it seems like your answer doesn't match the options.
+Use 1,2,3 or 'MVP', 'CCP', 'End' to answer.
+--> """)
+        
+        # Looping through the question again
+        to_do_input = input(prompt = f"""
+What do you want to do next?
+    {to_do_lst[0]}
+    {to_do_lst[1]}
+    3. Bring the project to an end
+--> """)
+    
+    # After while loop go to
+    win_function()
+    
+###################
+# fail function   #
+###################
+
+# Fail function, only prints a final message and some art
+def fail_function():
+    print(f"""
+{'#' * 50}
+Unfortunately management has decided to cancel your project.
+    
+This can be due to multiple reasons, but most likely this means that your 
+project was probably too risky for the return that could be expected of it.
+Sometimes you also just have bad luck, so don't get too frustrated.
+
+You can always try again with a new project.
+
+In the end what makes you stronger is learning from your mistakes!
+
+Maybe these robots can help you with your next try: """)
+    time.sleep(0.5)
+    
+    print("""
+
+                                         |
+                                         |
+                                         |
+                                         |
+   _______                   ________    |
+  |ooooooo|      ____       | __  __ |   |
+  |[]+++[]|     [____]      |/  \/  \|   |
+  |+ ___ +|     ]()()[      |\__/\__/|   |
+  |:|   |:|   ___\__/___    |[][][][]|   |
+  |:|___|:|  |__|    |__|   |++++++++|   |
+  |[]===[]|   |_|_/\_|_|    | ______ |   |
+_ ||||||||| _ | | __ | | __ ||______|| __|
+  |_______|   |_|[::]|_|    |________|  
+              \_|_||_|_/                  
+                |_||_|                     
+               _|_||_|_                     
+      ____    |___||___|                     
+     /  __\          ____                     
+     \( oo          (___ \                     
+     _\_o/           oo~)/
+    / \|/ \         _\-_/_
+   / / __\ \___    / \|/  
+   \ \|   |__/_)  / / .- \ 
+    \/_)  |       \ \ .  /_/
+     ||___|        \/___(_/
+     | | |          | |  |
+     | | |          | |  |
+     |_|_|          |_|__|
+     [__)_)        (_(___]
+
+""")
+    time.sleep(0.5)
+    print(f"""
+{'#' * 50}""")
+    
+    time.sleep(3)
+    # asking the user if they want to try again
+    replay = input(prompt = f"""
+Do you want to try again?
+
+    1. Yes
+    2. NO
+--> """)
+    
+    # Trying to restart the game if they want to play again, otherwise stop
+    try:
+        while True:
+            if replay == '1' or "y" in replay.lower():
+                stage_1()
+                break
+            elif replay == '2' or "n" in replay.lower():
+                break
+            else:
+                replay = input(prompt = """
+Unexpected input. Please use 1/2 or yes/no to answer.
+--> """)
+                continue
+    except:
+        pass
+    
+    
+###################
+# win function    #
+###################    
+
+# Win function, only prints a final message and some art
+def win_function():
+    print(f"""
+{'#' * 50}
+You made it!
+
+Your project overcame all the challenges and was launched successfully.
+All you can do now is start your next project and try to keep the win streak
+going.
+
+But first, let's celebrate this with a party!
+I planned a small firework over the Bay for you:""")
+    time.sleep(0.5)
+
+    print("""
+
+                                   .''.
+       .''.      .        *''*    :_\/_:     .
+      :_\/_:   _\(/_  .:.*_\/_*   : /\ :  .'.:.'.
+  .''.: /\ :    /)\   ':'* /\ *  : '..'.  -=:o:=-
+ :_\/_:'.:::.  | ' *''*    * '.\'/.'_\(/_ '.':'.'
+ : /\ : :::::  =  *_\/_*     -= o =- /)\     '  *
+  '..'  ':::' === * /\ *     .'/.\'.  ' ._____
+      *        |   *..*         :       |.   |' .---"|
+        *      |     _           .--'|  ||   | _|    |
+        *      |  .-'|       __  |   |  |    ||      |
+     .-----.   |  |' |  ||  |  | |   |  |    ||      |
+ ___'       ' /"\ |  '-."".    '-'   '-.'    '`      |____
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                       ~-~-~-~-~-~-~-~-~-~   /|
+          )      ~-~-~-~-~-~-~-~  /|~       /_|
+        _-H-__  -~-~-~-~-~-~     /_|\    -~======-~
+~-\XXXXXXXXXX/~     ~-~-~-~     /__|_\ ~-~-~-~
+~-~-~-~-~-~    ~-~~-~-~-~-~    ========  ~-~-~-~
+      ~-~~-~-~-~-~-~-~-~-~-~-~-~ ~-~~-~-~-~-~
+                        ~-~~-~-~-~-~
+
+""")
+
+    print(f"""
+{'#' * 50}""")
+
+
+stage_1()
